@@ -4,14 +4,16 @@ using ContosoUniversity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContosoUniversity.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20210525213710_v")]
+    partial class v
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,9 +188,6 @@ namespace ContosoUniversity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Etat")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("HeureDebut")
                         .HasColumnType("datetime2");
 
@@ -204,7 +203,7 @@ namespace ContosoUniversity.Migrations
                     b.Property<string>("Salle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StageID")
+                    b.Property<int>("StageID")
                         .HasColumnType("int");
 
                     b.HasKey("SoutenanceID");
@@ -389,7 +388,9 @@ namespace ContosoUniversity.Migrations
                 {
                     b.HasOne("ContosoUniversity.Models.Stage", "Stage")
                         .WithMany()
-                        .HasForeignKey("StageID");
+                        .HasForeignKey("StageID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Stage");
                 });

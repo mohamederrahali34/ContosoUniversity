@@ -22,7 +22,9 @@ namespace ContosoUniversity.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Heure Fin")]
         public DateTime HeureFin { get; set; }
+        public int Etat { get; set; }
         public String Salle { get; set; }
         public IEnumerable<MembreJury> jury { get; set; }
+        public Stage Stage { get; set; }
     }
 }

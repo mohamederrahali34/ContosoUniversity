@@ -163,6 +163,7 @@ namespace ContosoUniversity.Controllers
                                    select e;
             ViewBag.Enseignants = new SelectList(enseignantsQuery.AsNoTracking(), "EnseignantID", "FullName", selectedEnseignant); 
         }
+       
         private void PopulateStudentsDropDownList(object selectedStudent = null)
         {
             var studentsQuery = from s in _context.Students

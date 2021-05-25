@@ -1,0 +1,49 @@
+﻿@model ContosoUniversity.Models.Soutenance
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Soutenance</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Jour)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Jour)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HeureDebut)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HeureDebut)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HeureFin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HeureFin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Salle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Salle)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SoutenanceID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

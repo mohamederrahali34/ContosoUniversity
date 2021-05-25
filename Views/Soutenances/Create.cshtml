@@ -1,0 +1,63 @@
+﻿@model ContosoUniversity.Models.Soutenance
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Nouvelle Soutenance</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Stage" class="control-label"></label>
+                <select asp-for="Stage" class="form-control" asp-items="ViewBag.Stages">
+                    <option value=""> --Select Stage--</option>
+                </select>
+                <!--<span asp-validation-for="" class="text-danger" />-->
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Note" class="control-label"></label>
+                <input asp-for="Note" class="form-control" value="0" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jour" class="control-label"></label>
+                <input asp-for="Jour" class="form-control" />
+                <span asp-validation-for="Jour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeureDebut" class="control-label"></label>
+                <input asp-for="HeureDebut" class="form-control" />
+                <span asp-validation-for="HeureDebut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeureFin" class="control-label"></label>
+                <input asp-for="HeureFin" class="form-control" />
+                <span asp-validation-for="HeureFin" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Etat" class="control-label"></label>
+                <input asp-for="Etat" class="form-control" value="0"/>
+                <span asp-validation-for="Etat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salle" class="control-label"></label>
+                <input asp-for="Salle" class="form-control" />
+                <span asp-validation-for="Salle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
