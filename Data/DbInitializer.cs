@@ -38,6 +38,8 @@ namespace ContosoUniversity.Data
             }
             context.SaveChanges();
 
+           
+
             var instructors = new Instructor[]
             {
                 new Instructor {FirstMidName="Kim",LastName="Abercrombie",HireDate=DateTime.Parse("1995-03-11")},
@@ -86,7 +88,7 @@ namespace ContosoUniversity.Data
                 new OfficeAssignment
                 {
                     InstructorID=instructors.Single(i => i.LastName == "Abercrombie").ID ,Location="Smith 17"
-                }, 
+                },
                 new OfficeAssignment
                 {
                     InstructorID=instructors.Single(i => i.LastName == "Errahali").ID ,Location="Rabat"
@@ -97,7 +99,7 @@ namespace ContosoUniversity.Data
                 }
         };
 
-            foreach(OfficeAssignment o in officeAssignements)
+            foreach (OfficeAssignment o in officeAssignements)
             {
                 context.OfficeAssignments.Add(o);
             }
@@ -137,7 +139,7 @@ namespace ContosoUniversity.Data
             foreach (Enrollment e in enrollments)
             {
                 var enrollmentInDataBase = context.Enrollments.Where(
-                    s => s.Student.ID==e.StudentID && s.Course.CourseID==e.CourseID).SingleOrDefault();
+                    s => s.Student.ID == e.StudentID && s.Course.CourseID == e.CourseID).SingleOrDefault();
                 if (enrollmentInDataBase == null)
                 {
                     context.Enrollments.Add(e);
@@ -147,6 +149,10 @@ namespace ContosoUniversity.Data
             context.SaveChanges();
 
 
+           
+
+
         }
+       
     }
 }

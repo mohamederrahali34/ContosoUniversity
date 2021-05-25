@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ContosoUniversity.Models.Stage>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Liste des soumissions</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Etudiant
+            </th>
+            <th>
+               Binome
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganismeAceuil)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SignatureValidation)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stagiaire.FullName) 
+            <td>
+                @Html.DisplayFor(modelItem => item.Binome.FullName)
+            </td>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganismeAceuil)
+            </td>
+
+            <td>
+                @if (item.SignatureValidation == -1)
+                {
+                    <p>Pas encore validé</p>
+                }
+                else if (item.SignatureValidation == 0)
+                {
+                    <p>Refusé</p>
+                }
+                else if (item.SignatureValidation == 1)
+                {
+                    <p>Validé</p>
+                }
+
+            </td>
+
+
+            <td>
+                <a asp-action="Valider" asp-route-id="@item.StageID">Valider</a> |
+                <a asp-action="Details" asp-route-id="@item.StageID">Details</a> |
+                <a asp-action="Refuser" asp-route-id="@item.StageID">Refuser</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

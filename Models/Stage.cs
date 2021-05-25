@@ -9,33 +9,34 @@ namespace ContosoUniversity.Models
     public class Stage
     {
         public int StageID { get; set; }
-        public Boolean EnBinome { get; set; }
+       
         [StringLength(50, MinimumLength = 3)]
         public string Description { get; set; }
         [StringLength(50, MinimumLength = 1)]
         [Display(Name = "Organisme d'acceuil")]
         public string OrganismeAceuil { get; set; }
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Country")]
+        [Display(Name = "Pays")]
         public string Pays { get; set; }
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "City")]
+        [Display(Name = "Ville")]
         public string Ville { get; set; }
-       
-        public Boolean SignatureValidation { get; set; }
+
+        public int SignatureValidation { get; set; } 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Start Date")]
+        [Display(Name = "Date Début")]
         public  DateTime  DateDebut { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "End Date")]
+        [Display(Name = "Date Fin")]
         public DateTime  DateFin { get; set; }
-       
 
-        IEnumerable<Student> Stagiaires { get; set; }
 
        
-        Enseignant Encadrant { get; set; }
+        public Student Stagiaire { get; set; }
+        public Student Binome { get; set; }
+        public int EnseignantID { get; set; }
+       public Enseignant Encadrant { get; set; }
     }
 }

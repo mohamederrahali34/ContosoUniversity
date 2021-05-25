@@ -11,7 +11,7 @@ using ContosoUniversity.Models.SchoolViewModels;
 using ContosoUniversity.Models.SchoolViewModels;
 namespace ContosoUniversity.Controllers
 {
-    public class InstructorsController : Controller
+    public class InstructorsController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly SchoolContext _context;
 

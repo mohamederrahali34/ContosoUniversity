@@ -10,7 +10,7 @@ using ContosoUniversity.Models;
     
 namespace ContosoUniversity.Controllers
 {
-    public class CoursesController : Controller
+    public class CoursesController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly SchoolContext _context;
 

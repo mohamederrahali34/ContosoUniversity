@@ -1,0 +1,75 @@
+﻿@model ContosoUniversity.Models.Stage
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Stage</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="StageID" />
+            <div class="form-group">
+                <label asp-for="Binome" class="control-label"></label>
+                <select asp-for="Binome" class="form-control" asp-items="ViewBag.Students">
+                    <option value=""> --Monome--</option>
+                </select>
+                <!--<span asp-validation-for="" class="text-danger" />-->
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrganismeAceuil" class="control-label"></label>
+                <input asp-for="OrganismeAceuil" class="form-control" />
+                <span asp-validation-for="OrganismeAceuil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pays" class="control-label"></label>
+                <input asp-for="Pays" class="form-control" />
+                <span asp-validation-for="Pays" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ville" class="control-label"></label>
+                <input asp-for="Ville" class="form-control" />
+                <span asp-validation-for="Ville" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SignatureValidation" /> @Html.DisplayNameFor(model => model.SignatureValidation)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateDebut" class="control-label"></label>
+                <input asp-for="DateDebut" class="form-control" />
+                <span asp-validation-for="DateDebut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateFin" class="control-label"></label>
+                <input asp-for="DateFin" class="form-control" />
+                <span asp-validation-for="DateFin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Encadrant" class="control-label"></label>
+                <select asp-for="EnseignantID" class="form-control" asp-items="ViewBag.Enseignants">
+                    <option value="">--Select Encadrant--</option>
+                </select>
+                <!--<span asp-validation-for="" class="text-danger" />-->
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models.SchoolViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ContosoUniversity.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly SchoolContext _context;
 
@@ -24,7 +25,7 @@ namespace ContosoUniversity.Controllers
 
         private readonly ILogger<HomeController> _logger;
 
-
+       
         public IActionResult Index()
         {
             return View();

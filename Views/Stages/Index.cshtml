@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ContosoUniversity.Models.Stage>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ma Soummission</h1>
+
+<p>
+    @if (!ViewBag.hasSoummission)
+    {
+        <a asp-action="Create">Nouvelle Soummission</a>
+    }
+
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganismeAceuil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ville)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SignatureValidation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateDebut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateFin)
+            </th>
+            <th>
+               Encadrant
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganismeAceuil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ville)
+            </td>
+            <td>
+
+                @if (item.SignatureValidation ==-1)
+                {
+                    <p>Pas encore Validé</p>
+                }
+                else if(item.SignatureValidation == 1)
+                { <p>Validé</p>}
+                else if(item.SignatureValidation == 0)
+                {
+                  <p>Refusé</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateDebut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Encadrant.FullName)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StageID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StageID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.StageID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

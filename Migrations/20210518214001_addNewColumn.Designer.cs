@@ -4,19 +4,21 @@ using ContosoUniversity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContosoUniversity.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20210518214001_addNewColumn")]
+    partial class addNewColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.1.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ContosoUniversity.Models.Course", b =>
@@ -33,8 +35,8 @@ namespace ContosoUniversity.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("CourseID");
 
@@ -72,8 +74,8 @@ namespace ContosoUniversity.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -148,17 +150,17 @@ namespace ContosoUniversity.Migrations
 
                     b.Property<string>("FirstMidName")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasColumnName("FirstName")
                         .HasColumnType("nvarchar(50)")
-                        .HasColumnName("FirstName");
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("ID");
 
@@ -171,8 +173,8 @@ namespace ContosoUniversity.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Location")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("InstructorID");
 
@@ -213,9 +215,6 @@ namespace ContosoUniversity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BinomeID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateDebut")
                         .HasColumnType("datetime2");
 
@@ -223,37 +222,33 @@ namespace ContosoUniversity.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<int>("EnseignantID")
+                    b.Property<bool>("EnBinome")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("EncadrantID")
                         .HasColumnType("int");
 
                     b.Property<string>("OrganismeAceuil")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Pays")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<int>("SignatureValidation")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StagiaireID")
-                        .HasColumnType("int");
+                    b.Property<bool>("SignatureValidation")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Ville")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("StageID");
 
-                    b.HasIndex("BinomeID");
-
-                    b.HasIndex("EnseignantID");
-
-                    b.HasIndex("StagiaireID");
+                    b.HasIndex("EncadrantID");
 
                     b.ToTable("Stage");
                 });
@@ -270,16 +265,21 @@ namespace ContosoUniversity.Migrations
 
                     b.Property<string>("FirstMidName")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasColumnName("FirstName")
                         .HasColumnType("nvarchar(50)")
-                        .HasColumnName("FirstName");
+                        .HasMaxLength(50);
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int?>("StageID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("StageID");
 
                     b.ToTable("Student");
                 });
@@ -306,8 +306,6 @@ namespace ContosoUniversity.Migrations
                         .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.CourseAssignment", b =>
@@ -323,10 +321,6 @@ namespace ContosoUniversity.Migrations
                         .HasForeignKey("InstructorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Instructor");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.Department", b =>
@@ -334,8 +328,6 @@ namespace ContosoUniversity.Migrations
                     b.HasOne("ContosoUniversity.Models.Instructor", "Administrator")
                         .WithMany()
                         .HasForeignKey("InstructorID");
-
-                    b.Navigation("Administrator");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.Enrollment", b =>
@@ -351,10 +343,6 @@ namespace ContosoUniversity.Migrations
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.Enseignant", b =>
@@ -362,8 +350,6 @@ namespace ContosoUniversity.Migrations
                     b.HasOne("ContosoUniversity.Models.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentID");
-
-                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.OfficeAssignment", b =>
@@ -373,31 +359,22 @@ namespace ContosoUniversity.Migrations
                         .HasForeignKey("ContosoUniversity.Models.OfficeAssignment", "InstructorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Instructor");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.Stage", b =>
                 {
-                    b.HasOne("ContosoUniversity.Models.Student", "Binome")
-                        .WithMany()
-                        .HasForeignKey("BinomeID");
-
                     b.HasOne("ContosoUniversity.Models.Enseignant", "Encadrant")
                         .WithMany()
-                        .HasForeignKey("EnseignantID")
+                        .HasForeignKey("EncadrantID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.HasOne("ContosoUniversity.Models.Student", "Stagiaire")
-                        .WithMany()
-                        .HasForeignKey("StagiaireID");
-
-                    b.Navigation("Binome");
-
-                    b.Navigation("Encadrant");
-
-                    b.Navigation("Stagiaire");
+            modelBuilder.Entity("ContosoUniversity.Models.Student", b =>
+                {
+                    b.HasOne("ContosoUniversity.Models.Stage", null)
+                        .WithMany("Stagiaires")
+                        .HasForeignKey("StageID");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.MembreJury", b =>
@@ -405,35 +382,6 @@ namespace ContosoUniversity.Migrations
                     b.HasOne("ContosoUniversity.Models.Soutenance", null)
                         .WithMany("jury")
                         .HasForeignKey("SoutenanceID");
-                });
-
-            modelBuilder.Entity("ContosoUniversity.Models.Course", b =>
-                {
-                    b.Navigation("CourseAssignements");
-
-                    b.Navigation("Enrollments");
-                });
-
-            modelBuilder.Entity("ContosoUniversity.Models.Department", b =>
-                {
-                    b.Navigation("Courses");
-                });
-
-            modelBuilder.Entity("ContosoUniversity.Models.Instructor", b =>
-                {
-                    b.Navigation("courseAssignements");
-
-                    b.Navigation("OfficeAssignement");
-                });
-
-            modelBuilder.Entity("ContosoUniversity.Models.Soutenance", b =>
-                {
-                    b.Navigation("jury");
-                });
-
-            modelBuilder.Entity("ContosoUniversity.Models.Student", b =>
-                {
-                    b.Navigation("Enrollments");
                 });
 #pragma warning restore 612, 618
         }
